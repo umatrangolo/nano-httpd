@@ -150,13 +150,13 @@ object HttpRequest {
 object NanoHttpd extends App {
   private val log: Logger = LoggerFactory.getLogger(this.getClass)
 
-  def parseArguments = args match {
+  def parseArguments = args.tail match {
     case Array("--port", n, "--root", s) => (n.toInt, s)
     case Array("--root", s, "--port", n) => (n.toInt, s)
   }
 
-  if (args.size != 4) {
-    println("usage: --port <port number> --root <root folder>")
+  if (args.size != 5) {
+    println("usage: --port <port number> --root <root folder>\nargs: %s".format(args.mkString(",")))
     System.exit(-1)
   }
 
